@@ -17,10 +17,11 @@ set /a rf=1
  
 ::Выводим список файлов согласно указанной маске и делаем проход циклом по каждому найденному
 
-goto filter
+:: Если нужно сделать листинг отдельных паппок то включим тут переход и внизу отдельно задаем пути
+rem goto filter
 
 ::Задаем размещение исходной папки
-set $srcDir=C:\Users\adm\git\%app$\src
+set $srcDir=C:\Users\adm\git\%app%\src
 
 for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
   rem Сбрасываем счетчик кол-ва строк
@@ -40,13 +41,13 @@ for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
     )
 )
 
-exit
+goto exit
 
 :: Если необходимо можно по разным папкам пройтись
 :filter
 
 ::Задаем размещение исходной папки
-set $srcDir=C:\Users\adm\git\Erachain\src\controller
+set $srcDir=C:\Users\adm\git\%app%\src\controller
 
 for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
   rem Сбрасываем счетчик кол-ва строк
@@ -65,7 +66,7 @@ for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
     )
 )
 
-set $srcDir=C:\Users\adm\git\Erachain\src\core
+set $srcDir=C:\Users\adm\git\%app%\src\core
 for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
   rem Сбрасываем счетчик кол-ва строк
   set /a r=1
@@ -83,5 +84,6 @@ for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
     )
 )
 
+:exit
 
 beep

@@ -2,8 +2,11 @@
 ::Включение отложенного расширения переменных среды
 ::позволяет использовать результаты изменения переменных внутри цикла, заключая их в воскл. знак (!)
 setlocal EnableDelayedExpansion
+
+set app=ErachainIJ
+
 ::Задаем результирующий файл
-set $out=C:\Users\adm\git\out.txt
+set $out=C:\Users\adm\git\out-%app%.txt
 ::Маска поиска файлов
 set $mask=*.java
 
@@ -17,7 +20,7 @@ set /a rf=1
 goto filter
 
 ::Задаем размещение исходной папки
-set $srcDir=C:\Users\adm\git\Erachain\src
+set $srcDir=C:\Users\adm\git\%app$\src
 
 for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
   rem Сбрасываем счетчик кол-ва строк
@@ -39,6 +42,7 @@ for /f "delims=" %%i in ('dir "%$srcDir%\%$mask%" /s /b /a:-d') do (
 
 exit
 
+:: Если необходимо можно по разным папкам пройтись
 :filter
 
 ::Задаем размещение исходной папки
